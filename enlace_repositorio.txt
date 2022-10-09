@@ -1,0 +1,15 @@
+Hola!
+
+Enlace de este proyecto en repositorio llamado Proyectos_base_Joao_Yoss en GitHub, de perfil Joaoyoss de Yosmel Abreu Malvàrez (contenido todos los proyectos).
+
+https://github.com/Joaoyoss/Proyectos_base_Joao_Yoss
+
+Usuario y contraseña de git por si lo piden:
+
+Usuario:Joaoyoss
+Correo asociado a git y github: yosmelmalvarez@gmail.com
+Contraseña: Yoss75041101400
+
+Se clona con este URL despuès del comando de clonar de git: https://github.com/Joaoyoss/Proyectos_base_Joao_Yoss.git
+
+Y EUREKAA!! Clonò el repo en eptrp lugar...
