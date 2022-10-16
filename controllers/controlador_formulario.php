@@ -17,15 +17,40 @@ Class ControladorFormulario{
                 return $var_registro;
                }
          } 
-            }#ESTOOO quedooo de piiiingaaaaaaaaaa|||||!!!!!!!*/
+            }#ESTOOO quedooo de piiiingaaaaaaaaaa|||||!!!!!!!ESCRIBIR*/
             static public function ctrRegistro(){
                 if(isset($_POST["var_registroNombre"])){
-                    $tabla="registro_usuarios";#nombre de la tabla
-                    $datos=array("nombre"=>$_POST["var_registroNombre"],#Variables que estàn en el la funciòn mdlRegistro de la clase ModeloFormularios del archivo modelo formulario del models y que recogen las variables de html registro y las guarda en estas variables de la clase ModeloFormularios del models y ese a su vez serà ejecutado por la clase conexiòn tambien del models.
-                                 "email"=>$_POST["var_registroEmail"],
-                                 "password"=>$_POST["var_registroPassword"]); #..y pasan al models instanciando esa clase del models en una segunda funcion aquì abajo...:
+
+                    /**=================================================================0
+                     * !!SEGURIDAD!!  AQUÌ SEMCOLOCAS UNA FUNCION DE VALIDACION PARA DETECTAR INPUT DE JS O CODIGOSEN LOS REGISTROS
+                     * ===================================================================
+                     */#________DE ESTA MANERA EVITAMOS ATAQUES CROSS-SITE SCRIPTING
+                    if (preg_match('/^[a-zA-ZñÑàèìòùÀÈÌÒÙüéáíóúÁÉÍÓÚ ]+$/', $_POST["var_registroNombre"])&&
+                        preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_])*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST["var_registroEmail"])&&
+                        preg_match('/^[0-9a-zA-Z]+$/', $_POST["var_registroPassword"])){ #En caso de còdigo no envìa el input y pasa alelse del error abajo #Darà error con caracteres de ( ESOS <>/!"]})o palabras claves en el input porque son para escribir còdigo.
+                        
+                    
+                        $tabla="registro_usuarios";#nombre de la tabla
+
+                         #======================================================================
+                         #  REGISTRO DE TOKEN PARA SALVAGUARDAR COPIA EN BASE DE DATOS token!!!!
+                         #=========================================================================
+                        $token=md5($_POST["var_registroNombre"]."+".$_POST["var_registroEmail"]);
+
+                        $datos=array("token"=>$token,#Acà pasamos esa variable token creada anteriormente y que contiene la cadena str con la concatenaciòn de nombre mas correo y pasada por la funciòn md5 pars generar un token que serà guardado en bd.
+                        "nombre"=>$_POST["var_registroNombre"],#Variables que estàn en el la funciòn mdlRegistro de la clase ModeloFormularios del archivo modelo formulario del models y que recogen las variables de html registro y las guarda en estas variables de la clase ModeloFormularios del models y ese a su vez serà ejecutado por la clase conexiòn tambien del models.
+                        "email"=>$_POST["var_registroEmail"],
+                        "password"=>$_POST["var_registroPassword"]); #..y pasan al models instanciando esa clase del models en una segunda funcion aquì abajo...:
                     $respuesta=ModeloFormularios::mdlRegistro($tabla,$datos); #Almaceno lo que me entregue el modelo en el objeto respuesta. Esta respuesta viene de modelo formulario y se le devuelve a la vista porque es instanciada y llamada por registro en el view.
                     return $respuesta;#Esta respuesta se retorna de lo que traiga el modelo.
+
+                    }else {
+                        $respuesta ="error_caracter_introducido";
+                        return $respuesta; #Darà error con caracteres de <>/!"]}o palabras claves en el input porque son para escribir còdigo
+
+                    }
+
+                    
                 }
             }
 
@@ -54,7 +79,7 @@ Class ControladorFormulario{
 
                 $respuesta=ModeloFormularios::mdlLeerRegistro($tabla, $item, $valor);#Traigo en valor o leo todos los datos de la base de datos..
 
-                #echo '<pre>'; print_r($respuesta); echo '</pre>';
+                echo '<pre>'; print_r($respuesta); echo '</pre>';
                 
                 if($respuesta["email"] == $_POST["var_ingresoEmail"] && $respuesta["password"] == $_POST["var_ingresoPassword"]){
 
@@ -89,28 +114,120 @@ Class ControladorFormulario{
          static public function ctrActualizarRegistro(){
            
             if(isset($_POST["var_actualizarNombre"])){   #Es que aparece un nombre introducido en el campo nombre del text area input del update del cliente, (aunque acà no aparece una opciòn si el cliente o usuario no coloca algo en el campo nombre del input de actualzaciòn). SIEMPRE ESTARÀ LLENO PORQUE SE LLENA AUTOMÀTICO POR LA VARIABLE DE LECTURA por tanto nunca pasarà a la opciòn else de abajo.
-        
-                if($_POST["var_actualizarPassword"] !=""){  #Esta comprueba si rellenaron el password NUEVO del input VISIBLE (quiere decir que existe voluntad del usuario por cambiarlo) para entonces asignarlo a la nueva variable creada de selcciòn es DIFERENTE DE NULO y darà TRUE por lo que pasarà a declarar en ka variable nueva este nuevo dato del cliente; pero si decidiò dejarla con el mismo (este dato vendrà vacio y sera false el !-diferente-) por lo que pasarà pasarà abajo, y no le asigna a una nueva data a la misma variable declarada password, manteniendo el dato que venìa en var_no_actualizarPassword.
-        
-                    $password=$_POST["var_actualizarPassword"];#Esta viene del dato automàtico editar etiqueta input donde asigna el mismo valor que viene porque el cliente decidiò no escribir nada y viene vacio y pasa el dato automatico.
-        
-                    }else{
-        
-                    $password=$_POST["var_no_actualizarPassword"];  #Esta viene del dato automàtico editar etiqueta input donde asigna el mismo valor que viene porque es false de contrario de vacìo (es decir: cuando venga vacio darà un falso)
-                   }
-                       
-                $tabla="registro_usuarios";#nombre de la tabla
-                $datos=array("id"=>$_POST["var_idUsuario"],#Viene del input de editar que viene de la tabla y lo pasa al CRUD data.
-                             "nombre"=>$_POST["var_actualizarNombre"],#Variables que estàn en el la funciòn mdlRegistro de la clase ModeloFormularios del archivo modelo formulario del models y que recogen las variables de html registro y las guarda en estas variables de la clase ModeloFormularios del models y ese a su vez serà ejecutado por la clase conexiòn tambien del models y lo pasa al CRUD data.
-                             "email"=>$_POST["var_actualizarEmail"],#Viene de editar input y lo pasa al CRUD  data.
-                             "password"=>$password); #..y pasan al models instanciando esa clase del models en una segunda funcion aquì abajo...
-                $respuesta=ModeloFormularios::mdlActualizarRegistro($tabla, $datos); #lo pasa array data y tabla al model que llama al conetaer con el argumento
 
-                return $respuesta;
+                if (preg_match('/^[a-zA-ZñÑàèìòùÀÈÌÒÙüéáíóúÁÉÍÓÚ. ]+$/', $_POST["var_actualizarNombre"])&&
+                    preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_])*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST["var_actualizarEmail"])){
 
 
-                     #aparece el campo input var_actualizarNombre con algùn dato o siempre estarà llenoa no ser que ocurra un error
+                    #\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+                    $usuario=ModeloFormularios::mdlLeerRegistro("registro_usuarios", "token", $_POST["var_tokenUsuario"]);#Traigo en valor o leo todos los datos de la base de datos..y este ultimo dato del argumento me viene del nombre de variable del input del boton editar de la pàgina editar
+                    echo '<pre>'; print_r($usuario); echo '0- Datos de la BD</pre>';#Viene de la tabla token que traje y todo lo demàs
+                    #\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+                    #\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+                    $token_busuqeda=($usuario["token"]);#token de tabla; Este igual es viejo y me debe coincidir con el var_tokenUsuario
+                    echo '<pre>'; print_r($token_busuqeda); echo ' 1- Token de la BD</pre>';#\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+                    #\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+                    echo '<pre>'; print_r($_POST["var_tokenUsuario"]); echo ' 2- Antiguo token del usuario BD</pre>';
+                    #\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||#Viene de cliente input token (El token original que trae el editar del pagina inicio) armado (El viejo antes de la tabla antes de la actualizaciòn..si  lo cambia se jode el usuario cliao)!!!!ESTE ES UNO DE LOS TIPOS!!!Este es el otro que tendrìa que usar en la comparaciòn que me sirve para verificar si el cliente alterò en consola navegador el token hidden que viene de la primera lectura de tabla========
+                  
+                    #\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+                    $token_conformado_tabla=md5($usuario["nombre"]."+".$usuario["email"]);#tabla armando md5 ESTe es nuevo
+                    echo '<pre>'; print_r($token_conformado_tabla); echo ' 3- Token conformado md5 de los datos de la BD</pre>';
+                    #\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+                    echo '<br>';
+                    $token_conformado_actualizado_usuario=md5($_POST["var_actualizarNombre"]."+".$_POST["var_actualizarEmail"]);#input armando md5 con lo nuevo que escriba el cliente NUEVO
+                    echo '<pre>'; print_r($_POST["var_actualizarNombre"]); print_r($_POST["var_actualizarEmail"]); echo ' Entrada actual al md5 del input</pre>';
+                    echo '<pre>'; print_r($token_conformado_actualizado_usuario); echo ' 4- Token conformado md5 de input recien</pre>';
+                    #echo '</br>';
+
+
+                    echo '<br>';
+                    $token_conformado_input_inicial_usuario=md5($_POST["var_armado_token_inicial_nombre_Usuario"]."+".$_POST["var_armado_token_inicial_email_Usuario"]);# armando md5 VIEJO con el input viejo de la variable nombre e email original. (con esto sè si alterò el nùmero primero de token de la tabla que debe ser este )COMPARAR.===========
+                    echo '<pre>'; print_r($_POST["var_armado_token_inicial_nombre_Usuario"]); print_r($_POST["var_armado_token_inicial_email_Usuario"]); echo ' Entrada actual al md5 del input</pre>';
+                    echo '<pre>'; print_r($token_conformado_input_inicial_usuario); echo ' 5- Token anterior input md5</pre>';
+                    #echo '</br>';
+                    
+
+                    
+                   
+
+                        if($token_conformado_input_inicial_usuario==$_POST["var_tokenUsuario"]){#Esta condicon me compara el directo de la variable input campo con el que conformè por tabla bd que traje y mètodo md5 El tema es garantizar que no lo manipule.#####!!!!!SI E USUARIO MANIPULA INICIALMENTE EN EL TERMINAL DEL NAVEGADOR ALGÙN DATO DE NOMBRE, EMAIL O TOKEN INICIAL; NO SE CUMPLIRÀ ESTA CONDICION Y ME BOTARÀ A ERROR DE DATO DE ACTUALIZACIÒN Y A CARTEL ERROR DE DATOS MANIPULADOS:
+                            #___________________________________________________________________
+                        #Si coinciden sin alterar los datos de input token conformado md5 con nombre y email de input con token input; entonces contempla el còdigo o cuerpo de esta condiciòn, sino pasarà al else....
+
+                            if($_POST["var_actualizarPassword"] !=""){  #Esta comprueba si rellenaron el password NUEVO del input VISIBLE (quiere decir que existe voluntad del usuario por cambiarlo) para entonces asignarlo a la nueva variable creada de selcciòn es DIFERENTE DE NULO y darà TRUE por lo que pasarà a declarar en ka variable nueva este nuevo dato del cliente; pero si decidiò dejarla con el mismo (este dato vendrà vacio y sera false el !-diferente-) por lo que pasarà pasarà abajo, y no le asigna a una nueva data a la misma variable declarada password, manteniendo el dato que venìa en var_no_actualizarPassword.
+                                
+                                #if (preg_match('/^[0-9a-zA-Z]+$/', $_POST["var_actualizarPassword"])){
+                                   /* {
+                                        $respuesta="error_caracter_introducido_password"; #esta Se me dispara ac!!!!<<<<
+                                        return $respuesta;
+                                        }
+                                }
+                                else{*/
+            
+                                $password=$_POST["var_actualizarPassword"];#Esta viene del dato automàtico editar etiqueta input donde asigna el mismo valor que viene porque el cliente decidiò no escribir nada y viene vacio y pasa el dato automatico.
+                            }
+                            else {
+                                $password=$_POST["var_no_actualizarPassword"];  #Esta viene del dato automàtico editar etiqueta input donde asigna el mismo valor que viene porque es false de contrario de vacìo (es decir: cuando venga vacio darà un falso)
+                            }
+
+                            
+                            if($token_conformado_actualizado_usuario==$token_conformado_input_inicial_usuario){#Si la conformaciòn de md5 input es igual a la tabla ($usuario["token"]) $token_busuqeda: pasarè la actualizaciòn mdl; de lo contrario harè un borrar y un escribir con el nuevo token cambiado.
+                                $tabla="registro_usuarios";#nombre de la tabla
+                                $datos=array("token"=>$usuario["token"],#Viene del input de editar que viene de la tabla y lo pasa al CRUD data.
+                                            "nombre"=>$_POST["var_actualizarNombre"],#Variables que estàn en el la funciòn mdlRegistro de la clase ModeloFormularios del archivo modelo formulario del models y que recogen las variables de html registro y las guarda en estas variables de la clase ModeloFormularios del models y ese a su vez serà ejecutado por la clase conexiòn tambien del models y lo pasa al CRUD data.
+                                            "email"=>$_POST["var_actualizarEmail"],#Viene de editar input y lo pasa al CRUD  data.
+                                            "password"=>$password); #..y pasan al models instanciando esa clase del models en una segunda funcion aquì abajo...
+    
+                                echo '<pre>'; print_r($datos); echo '</pre>'; #Lo que manda de argumento para la tabla.           
+    
+                                $respuesta=ModeloFormularios::mdlActualizarRegistro($tabla, $datos); #lo pasa array data y tabla al model que llama al conetaer con el argumento
+    
+                                return $respuesta; #aparece el campo input var_actualizarNombre con algùn dato o siempre estarà llenoa no ser que ocurra un error
+                                }#input armando md5 igual al anterior y no serà necesario actualizar o variar el token; pero si necesito variar token debo  pasar al else...!!
+                                else {#Si los token me vienen diferente tomarè en vez de un update; un borrar y un mdl crear con los nuevos token...
+                                    $tabla="registro_usuarios";
+                                    $valor=$_POST["var_tokenUsuario"];
+                                    $respuesta=ModeloFormularios::mdlEliminarRegistro($tabla, $valor);
+                                    
+                                    if($respuesta=="ok"){
+                                        $tabla="registro_usuarios";
+                                        $datos=array("token"=>$token_conformado_actualizado_usuario,#Viene del input de editar que viene de la tabla y lo pasa al CRUD data.
+                                                     "nombre"=>$_POST["var_actualizarNombre"],#Variables que estàn en el la funciòn mdlRegistro de la clase ModeloFormularios del archivo modelo formulario del models y que recogen las variables de html registro y las guarda en estas variables de la clase ModeloFormularios del models y ese a su vez serà ejecutado por la clase conexiòn tambien del models y lo pasa al CRUD data.
+                                                     "email"=>$_POST["var_actualizarEmail"],#Viene de editar input y lo pasa al CRUD  data.
+                                                     "password"=>$password);
+                                        
+                                        echo '<pre>'; print_r($datos); echo '</pre>'; #Lo que manda de argumento para la tabla.   
+
+                                        $respuesta=ModeloFormularios::mdlRegistro($tabla, $datos);#Traigo en valor o leo todos los datos de la base de datos..
+
+                                        echo '<pre>'; print_r($respuesta); echo '</pre>';
+                                        return $respuesta;
+                                    }
+
+                                }
+                            
+                            
+
+                        #___________________________________________________________________
+                        #Si coinciden sin alterar los datos de input token conformado md5 con nombre y email de input con token input; entonces contempla el còdigo o cuerpo de esta condiciòn, sino pasarà al else....
+                        }
+                        else {
+                            $respuesta="error_de_datos_actualizaciòn"; #esta Se me dispara ac!!!!<<<<
+                            return $respuesta;
+                            }
+                
+
+                            
                 }  
+                else {
+                    $respuesta ="error_caracter_introducido";
+                    return $respuesta; #Darà error con caracteres de <>/!"]}o palabras claves en el input porque son para escribir còdigo / con el segundo if sin cumplir deberìa saltar este...!
+                    } 
+            } 
         }  
         
                 /*======================================================================
@@ -121,31 +238,33 @@ Class ControladorFormulario{
             if(isset($_POST["var_eliminarRegistro"])){   #Preguntamos si viene una variable post eliminar registro.
                  #si vienen algo en el post (me llamarà al mètodo del modelo mdl Eliminar registro) para concatenar los datos a la base de datos y la elaboraciòn de la sintaxis SQL y la conexiòn.
 
-                $tabla="registro_usuarios";
-                $valor=$_POST["var_eliminarRegistro"];
+                 $usuario=ModeloFormularios::mdlLeerRegistro("registro_usuarios", "token", $_POST["var_eliminarRegistro"]);#Traigo en valor o leo todos los datos de la base de datos..
+        
+                 $comparar_token=md5($usuario["nombre"]."+".$usuario["email"]);
+ 
+                 if($comparar_token==$_POST["var_eliminarRegistro"]){
+                
+                    $tabla="registro_usuarios";
+                    $valor=$_POST["var_eliminarRegistro"];
 
-                $respuesta=ModeloFormularios::mdlEliminarRegistro($tabla, $valor);#Traigo en valor o leo todos los datos de la base de datos..
+                    $respuesta=ModeloFormularios::mdlEliminarRegistro($tabla, $valor);#Traigo en valor o leo todos los datos de la base de datos..
 
-                if($respuesta=="ok"){
+                    if($respuesta=="ok"){
 
                     echo '<script>
-                    if (window.history.replaceState){ 
+                        if (window.history.replaceState){ 
                              window.history.replaceState(null, null, window.location.href);
-                    }
+                        }
                              window.location="index.php?var_pagina=inicio";
-                           </script>'; #Esta lìnea refresca la pàgina de inicio y automaticamente me actualiza lo que existe desde la base de datos.
+                    </script>'; #Esta lìnea refresca la pàgina de inicio y automaticamente me actualiza lo que existe desde la base de datos.
 
                     #'<div class="alert alert-success text-center py-3">Fuè eliminada </div>';
                     #echo'<b2 class="d-flex justify-content-center py-3"> Edite los datos que desea modificar de: '; print_r($value["nombre"]); echo'</b2>';
-
-   
-
+                   }
                 }
+            }
 
-                return $respuesta;
-         }
-
-    }
+        }
 
 
 
@@ -154,7 +273,7 @@ Class ControladorFormulario{
 
 
 
-?>
+
 
 
 

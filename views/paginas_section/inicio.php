@@ -1,4 +1,4 @@
-
+<!--debo crear un objeto en la vista que le haga la peticion al controlador para hacer una peticion de lectura a la tabla de la base de dartos para el read con la clase controllador formulario que llama y realciona al model que contiene las funciones crear y read hasta ahora y voy a llamar a la funciòn read de la clase a travès de ese controlador formulario.-->
 <?php
 
 if(isset($_SESSION["var_validarIngreso"])){
@@ -12,7 +12,11 @@ if(isset($_SESSION["var_validarIngreso"])){
   
 }
 
-$lectura_datos_almacenados=ControladorFormulario::ctrSeleccionarRegistro(null, null);
+$lectura_datos_almacenados=ControladorFormulario::ctrSeleccionarRegistro(null, null);#Aquì està instanciando la clase y ejecutando el mètodo ctrSeleccionarRegistro que es la funcion de lectrua del controlador que me llama la base de daros del models
+#echo '<pre>';print_r($lectura_datos_almacenados); echo '</pre>';  #Saldrà por acà la impresiòn en navegador interfase de lo que trae la baed e datos. Aquì devolverìa la tablea t solamente serìa extraer la data del array del objeto que traeque trae.
+
+#OJOOO!!!!En MySQL estàn todas las funciones que puede realizar mysql en la pagina -w3schools.com- opciòn menù SQL en Date Functions (aparecen todas las funciones internas que puedes usar MySQL DATE_FORMAT()Function) y buscas sobre datos, o lo que requieras....!!!!!
+#Ejemplo: -date_format ("argumento de captura de la data de fecha como viene","XY devolver lo que necesitamos");  SE TRABAJA EN EL MODELS EN LA FUNCTION DE LA DATA PROCES. DONDE VIENE EL CODIGO SQL ES SQL OJO||||!!!!-
 
 /*____________________________________________________________
 ESTA ES LA DATA QUE TRAE: (justo como aoarece en el navegador)
@@ -118,6 +122,8 @@ Array
 
 )*/
 
+#Còmo hago que aparezca este contenido en la tabla? R/: Haciendo un recorrido por el objeto en usuarios con un foreach de codigo php dentro de html y html en la parte de la informaciòn del body tomando los valores por cada uno de esos indices. 
+# ASÎ: -<? php foreach ($usuarios as $key => $value): ? >-   -<? php endforeach ? >- y colocando el tr dentro del foreach y haciendo adentro echo de la linea del for eachg del html que quiere cmabiar.
 
 ?>
 
@@ -275,6 +281,7 @@ Array
                   <th>Nombre</th>
                   <th>Email</th>
                   <th>Fecha de creaciòn</th>
+                  <th>Token</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -288,16 +295,17 @@ Array
                   <td><?php echo $value["nombre"];?></td>
                   <td><?php echo $value["email"];?></td>
                   <td><?php echo $value["fecha"];?></td>
+                  <td><?php echo $value["token"];?></td>
                   <td>
                   <div class="btn-group">
 
                     <div class="px-1">
-                    <a href="index.php?var_pagina=editar&id=<?php echo $value["id"];?>" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a>  <!--!!!!OJO se debe poner obligatoriamente la etiqueta <a> ancor (anclaje) y no button para que me trabaje el href porue sin la etiqueta anle NO TRABAJA EL HREF; el href solo trabaja en etiquetas ancle!!-->
+                    <a href="index.php?var_pagina=editar&var_gt_token=<?php echo $value["token"];?>" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a>  <!--!!!!OJO se debe poner obligatoriamente la etiqueta <a> ancor (anclaje) y no button para que me trabaje el href porue sin la etiqueta anle NO TRABAJA EL HREF; el href solo trabaja en etiquetas ancle!!-->
                     </div>
 
                     <div class="px-1">
                     <form method="post"><!--En este caso del boton delete para el crud a diferencia del update que se mandaba el dato con get por url, acà se envia el id para el delete del crus sql por un post en un etiqueta dom de html formulario y el boton delete se convuerte en tipo submit o envìo de formulario, sleeccionando el mètodo en la etiqueta formulario: colocando methodo post-->
-                      <input type="hidden" value="<?php echo $value["id"]; ?>" name="var_eliminarRegistro"><!--Aquì existe posibilidad de enviar un paràmetro tipo oculto que tendrà como nombre de variable: -->
+                      <input type="hidden" value="<?php echo $value["token"]; ?>" name="var_eliminarRegistro"><!--Aquì existe posibilidad de enviar un paràmetro tipo oculto que tendrà como nombre de variable: -->
                       <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
 
                          <?php

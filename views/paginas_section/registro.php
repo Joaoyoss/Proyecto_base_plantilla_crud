@@ -7,7 +7,7 @@
 </!--div-->
 <!--<div class="d-flex justify-content-center">-->
 
-<form class="p-2" method="post">
+<form class="p-2" method="post"><!--ojo!!! que debì colocar antes este metodo en el form!!!!!!!PERO OJOOOO COJOOOONEEEE CON MAYÙSCULA!!!!!!!!!!!!!!!!!11PIIIIINNNNGAAAA||||||||Y TIENES QUE COLOCAR LA DIRECCIÒN DE URL COOOÑOOO|||||||!!!!!!!!!!!!!!!!!SE COLOCA SIEMPRE EN ACTION LA DIRECCIÒN DEL INDEX QUE ENLAZA CON EL CONTROLADOR ---PORQUE ES QUIÈN TIENE TODOS LO REQUIRED--- QUE ENLAZA CON EL RESTO DE LA PLANTILLA QUE ES QUIENN LLAMA EL SECTION DE PLANTILLA Y LOS SECTION-->
 
         <div class="form-group">
             <label for="nombre">Registre su nombre y sus apellidos:</label>
@@ -74,6 +74,26 @@
             </script>'; #Esto borra la informaciòn que trae el formulario en el navegador html
 
             echo '<div class="alert alert-success">El usuario ha sido registrado</div>';
+           }
+
+           else if($registroFormulario=="error_caracter_introducido"){
+            echo '<script>
+            if (window.history.replaceState){ 
+                     window.history.replaceState(null, null, window.location.href);
+            }
+            </script>'; #Esto borra la informaciòn que trae el formulario en el navegador html
+
+            echo '<div class="alert alert-danger">Error, de caracteres introducidos, no se permiten caracteres especiales</div>';     
+           }
+
+           else if($registroFormulario=="error"){
+            echo '<script>
+            if (window.history.replaceState){ 
+                     window.history.replaceState(null, null, window.location.href);
+            }
+            </script>'; #Esto borra la informaciòn que trae el formulario en el navegador html
+
+            echo '<div class="alert alert-danger">Error de conexiòn</div>';     
            }
            #echo $registroFormulario;
            

@@ -14,9 +14,10 @@ Class ModeloFormularios{
     static public function mdlRegistro($tabla, $datos){ #Tengo dos paràmetros: nombre de la tabla y los datos
          #1ro Debo crear un objeto que me traiga la conexiòn de la base de datos y se llmamarà stmt (statement -declaraciòn en español-)
          #2do Necesito que el modelo devuelva un ok al controlador cuando almacene la infirmaciòn y el controlador de ese ok a la vista.
-         $stmt=Conexion::conectar()->prepare("INSERT INTO $tabla(nombre, email, password) VALUES (:nombre, :email, :password)"); #Objeto muy tradicional en las conexiones PDO que instancia a conexion. Esto trae el link de conexiòn a la base de datos que es lo que devuelve conectar para poder hacer una preparaciòn de sentencia SQL que va dentro del parentesis (usarè la sentencia insertar) se copia el fragmento tal cual de SQL de la base de dato consola. (con dos puntos es paràmetros ocultos que vienen en ka variable datos).
+         $stmt=Conexion::conectar()->prepare("INSERT INTO $tabla(token, nombre, email, password) VALUES (:token, :nombre, :email, :password)"); #Objeto muy tradicional en las conexiones PDO que instancia a conexion. Esto trae el link de conexiòn a la base de datos que es lo que devuelve conectar para poder hacer una preparaciòn de sentencia SQL que va dentro del parentesis (usarè la sentencia insertar) se copia el fragmento tal cual de SQL de la base de dato consola. (con dos puntos es paràmetros ocultos que vienen en ka variable datos).
 
          #Usaremos la funciòn bindParam() que sirve para vincular una variable de php a un paràmetro de sustituciòn con nombre o de signo de interrogaciòn correspondiente de la sentencia SQL usada para preparar la sentencia.
+         $stmt->bindParam(":token",$datos["token"], PDO::PARAM_STR);
          $stmt->bindParam(":nombre",$datos["nombre"], PDO::PARAM_STR);
          $stmt->bindParam(":email",$datos["email"], PDO::PARAM_STR);
          $stmt->bindParam(":password",$datos["password"], PDO::PARAM_STR);
@@ -66,13 +67,14 @@ Class ModeloFormularios{
 
       static public function mdlActualizarRegistro($tabla, $datos){
         
-        $stmt=Conexion::conectar()->prepare("UPDATE $tabla SET nombre=:nombre, email=:email, password=:password WHERE id=:id");#cooojooooneeee!!!!EL PUNTO O LA COMA PINGAAAA!!!!(:) es el dato en SQL
-        #$stmt=Conexion::conectar()->prepare("UPDATE $tabla SET `nombre`=':nombre', `email`=':email', `password`=':password' WHERE `id`=':id'"); 
+        $stmt=Conexion::conectar()->prepare("UPDATE $tabla SET nombre=:nombre, email=:email, password=:password WHERE token=:token");#cooojooooneeee!!!!EL PUNTO O LA COMA PINGAAAA!!!!(:) es el dato en SQL
+        #$stmt=Conexion::conectar()->prepare("UPDATE $tabla SET `nombre`=':nombre', `email`=':email', `password`=':password' WHERE `token`=':token'"); 
 
+        
         $stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
         $stmt->bindParam(":email", $datos["email"], PDO::PARAM_STR);
         $stmt->bindParam(":password", $datos["password"], PDO::PARAM_STR);
-        $stmt->bindParam(":id", $datos["id"], PDO::PARAM_INT);
+        $stmt->bindParam(":token", $datos["token"], PDO::PARAM_STR);
 
         if($stmt->execute()){
            return "ok";
@@ -89,10 +91,10 @@ Class ModeloFormularios{
 
         static public function mdlEliminarRegistro($tabla, $valor){
         
-          $stmt=Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id=:id");#cooojooooneeee!!!!EL PUNTO O LA COMA PINGAAAA!!!!(:) es el dato en SQL
-          #$stmt=Conexion::conectar()->prepare("UPDATE $tabla SET `nombre`=':nombre', `email`=':email', `password`=':password' WHERE `id`=':id'"); 
+          $stmt=Conexion::conectar()->prepare("DELETE FROM $tabla WHERE token=:token");#cooojooooneeee!!!!EL PUNTO O LA COMA PINGAAAA!!!!(:) es el dato en SQL
+          #$stmt=Conexion::conectar()->prepare("UPDATE $tabla SET `nombre`=':nombre', `email`=':email', `password`=':password' WHERE `token`=':token'"); 
   
-          $stmt->bindParam(":id", $valor, PDO::PARAM_INT);
+          $stmt->bindParam(":token", $valor, PDO::PARAM_INT);
   
           if($stmt->execute()){
              return "ok";
