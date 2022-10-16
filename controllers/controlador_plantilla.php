@@ -20,4 +20,3 @@ Class ControladorPlantilla{
 
 
 
-?>

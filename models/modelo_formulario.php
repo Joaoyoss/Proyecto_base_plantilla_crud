@@ -17,7 +17,7 @@ Class ModeloFormularios{
          $stmt=Conexion::conectar()->prepare("INSERT INTO $tabla(token, nombre, email, password) VALUES (:token, :nombre, :email, :password)"); #Objeto muy tradicional en las conexiones PDO que instancia a conexion. Esto trae el link de conexiòn a la base de datos que es lo que devuelve conectar para poder hacer una preparaciòn de sentencia SQL que va dentro del parentesis (usarè la sentencia insertar) se copia el fragmento tal cual de SQL de la base de dato consola. (con dos puntos es paràmetros ocultos que vienen en ka variable datos).
 
          #Usaremos la funciòn bindParam() que sirve para vincular una variable de php a un paràmetro de sustituciòn con nombre o de signo de interrogaciòn correspondiente de la sentencia SQL usada para preparar la sentencia.
-         $stmt->bindParam(":token",$datos["token"], PDO::PARAM_STR);
+         $stmt->bindParam(":token",$datos["token"], PDO::PARAM_STR);#EVITA ATAQUES CODE INJECCTION!!!!!!!!!!!!!!11
          $stmt->bindParam(":nombre",$datos["nombre"], PDO::PARAM_STR);
          $stmt->bindParam(":email",$datos["email"], PDO::PARAM_STR);
          $stmt->bindParam(":password",$datos["password"], PDO::PARAM_STR);
@@ -52,7 +52,7 @@ Class ModeloFormularios{
         return $stmt->fetchAll();
        }else{
         $stmt=Conexion::conectar()->prepare("SELECT *, DATE_FORMAT(fecha, '%d/%m/%Y') AS fecha FROM $tabla WHERE $item = :$item  ORDER BY id DESC"); 
-        $stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);
+        $stmt->bindParam(":".$item, $valor, PDO::PARAM_STR);#EVITA ATAQUES CODE INJECCTION!!!!!!!!!!!!!!11
         $stmt->execute(); 
         return $stmt->fetch();
           
@@ -71,7 +71,7 @@ Class ModeloFormularios{
         #$stmt=Conexion::conectar()->prepare("UPDATE $tabla SET `nombre`=':nombre', `email`=':email', `password`=':password' WHERE `token`=':token'"); 
 
         
-        $stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);
+        $stmt->bindParam(":nombre", $datos["nombre"], PDO::PARAM_STR);#EVITA ATAQUES CODE INJECCTION!!!!!!!!!!!!!!11
         $stmt->bindParam(":email", $datos["email"], PDO::PARAM_STR);
         $stmt->bindParam(":password", $datos["password"], PDO::PARAM_STR);
         $stmt->bindParam(":token", $datos["token"], PDO::PARAM_STR);
@@ -94,7 +94,7 @@ Class ModeloFormularios{
           $stmt=Conexion::conectar()->prepare("DELETE FROM $tabla WHERE token=:token");#cooojooooneeee!!!!EL PUNTO O LA COMA PINGAAAA!!!!(:) es el dato en SQL
           #$stmt=Conexion::conectar()->prepare("UPDATE $tabla SET `nombre`=':nombre', `email`=':email', `password`=':password' WHERE `token`=':token'"); 
   
-          $stmt->bindParam(":token", $valor, PDO::PARAM_INT);
+          $stmt->bindParam(":token", $valor, PDO::PARAM_INT);#EVITA ATAQUES CODE INJECCTION!!!!!!!!!!!!!!11
   
           if($stmt->execute()){
              return "ok";
@@ -113,4 +113,4 @@ Class ModeloFormularios{
 
 
 
-?>
+

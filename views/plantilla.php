@@ -158,7 +158,7 @@ session_start(); //Esto destruye las secciones que esxistan cuando salga del sis
         <?php
         # Acà con estas lineas de còdigo pregunto si vienen o nò variables GET en la URL; còmo se hace? : se hace con la funciòn isset y determina si una variable està definida o indefinida o null....
              if(isset($_GET["var_pagina"])){# OJO!!!El mètodo GET me busca esa variable var_pagina en la url y con el mètodo isset me determina si el dato de la variable en caso de que aparezca viene definido o null. !!!!-DEFINE SI EXISTE UNA VARIABLE Y UN DATO DE ESA VARIABLE-!!!!
-                if($_GET["var_pagina"]=="salir"||
+                if($_GET["var_pagina"]=="salir"||#EVITA ATAQUES CODE INJECCTION con esta lista blanca!!!!!!!!!!!!!!11
                    $_GET["var_pagina"]=="editar" ||        
                    $_GET["var_pagina"]=="inicio" ||       
                    /*Aquì (en la primera etapa del if isset) me define primeramente SI EXISTE en la url ALGUNA VARIABLE y si de existir esa VARIABLE, la misma se llame "var_pagina" (trae un dato que necesito para el bloque sectiòn) Y PUEDEN HABER VARIAS CONDICIONES:

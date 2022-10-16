@@ -102,11 +102,11 @@ echo'<b1 class="d-flex justify-content-center py-3"> EDITE los datos que desea m
 
                echo '<div class="alert alert-success text-center py-3">El usuario ha sido actualizado</div>
 
-               <!-- <script>
+                <script>
                     setTimeout(function(){
                        window.location="index.php?var_pagina=inicio";
                     },1500);
-               </script> -->';
+               </script>';
     }; #else {echo '<div class="danger danger-success">Lo sentimo, ocurriò un error</div>';}#Salta a esta lìnea si no 
 
          if ($actualizarFormulario=="error_de_datos_actualizaciòn"){

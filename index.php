@@ -13,4 +13,3 @@ $plantilla -> ctrTraerPlantilla ();#Se ejecuta con esto el mètodo
 #echo '<pre>'; print_r($conexion); echo '</pre>';#Permite hacer cosolas tanto en php cpmp en js y la consola PJO!!!! de php la saca con -print_r- que es similar a -var_dump-  que nos muestra que trae esa variable. Estas van en modelo formulario del models.!!!!!
 
 
-?>

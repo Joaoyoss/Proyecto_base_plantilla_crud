@@ -281,7 +281,7 @@ Array
                   <th>Nombre</th>
                   <th>Email</th>
                   <th>Fecha de creaciòn</th>
-                  <th>Token</th>
+                  <!--<th>Token</th>-->
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -295,7 +295,7 @@ Array
                   <td><?php echo $value["nombre"];?></td>
                   <td><?php echo $value["email"];?></td>
                   <td><?php echo $value["fecha"];?></td>
-                  <td><?php echo $value["token"];?></td>
+                  <!--<td><?php echo $value["token"];?></td>-->
                   <td>
                   <div class="btn-group">
 
