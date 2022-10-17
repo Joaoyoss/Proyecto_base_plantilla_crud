@@ -15,7 +15,7 @@ if(isset($_SESSION["var_validarIngreso"])){
 $lectura_datos_almacenados=ControladorFormulario::ctrSeleccionarRegistro(null, null);#Aquì està instanciando la clase y ejecutando el mètodo ctrSeleccionarRegistro que es la funcion de lectrua del controlador que me llama la base de daros del models
 #echo '<pre>';print_r($lectura_datos_almacenados); echo '</pre>';  #Saldrà por acà la impresiòn en navegador interfase de lo que trae la baed e datos. Aquì devolverìa la tablea t solamente serìa extraer la data del array del objeto que traeque trae.
 
-#OJOOO!!!!En MySQL estàn todas las funciones que puede realizar mysql en la pagina -w3schools.com- opciòn menù SQL en Date Functions (aparecen todas las funciones internas que puedes usar MySQL DATE_FORMAT()Function) y buscas sobre datos, o lo que requieras....!!!!!
+#!!!!En MySQL estàn todas las funciones que puede realizar mysql en la pagina -w3schools.com- opciòn menù SQL en Date Functions (aparecen todas las funciones internas que puedes usar MySQL DATE_FORMAT()Function) y buscas sobre datos, o lo que requieras....!!!!!
 #Ejemplo: -date_format ("argumento de captura de la data de fecha como viene","XY devolver lo que necesitamos");  SE TRABAJA EN EL MODELS EN LA FUNCTION DE LA DATA PROCES. DONDE VIENE EL CODIGO SQL ES SQL OJO||||!!!!-
 
 /*____________________________________________________________
@@ -265,9 +265,7 @@ Array
                 </tr>
               </tbody>
             </table>
-          -->
-
-          
+          -->      
 
             <!--==========================================================================
              CONTENIDO TABLA DINÀMICO CON FOREACH PHP DENTRO DE HTML

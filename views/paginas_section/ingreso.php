@@ -40,7 +40,6 @@
            $ingresoFormulario = new ControladorFormulario(); #Esto es un mètodo dinàmico (la acciòn se va a ejecutar desde el controlador y el controlador decidirà que va a hacer), en este caso: !!! reenviarme a la pagina de inicio si hago un ingreso correcto,el mètodo dinàmico DINÂMICO puede acceder a todo tipo de variables pero SIMEPRE NECESITA CREAR ANTES UN OBJETO PARA ACCEDER AL MÈTODO, mientras que un mètodo ESTÂTICO puede llamar solamente a otros mètodos static y no puede invocar un metodo dinàmico a partir de èl; PERO: PUEDE invocarlo sin crear previamente ningùn objeto (variable=new nada!), PUEDE ACCEDER DIRECTAMENTE POR EL NOMBRE DE LA CLASE y puede solamente acceder a variables estàticas.
            $ingresoFormulario->ctrIngreso();
 
-           
            #echo $registroFormulario;
            
            #if($formularioRegistro=="ok")

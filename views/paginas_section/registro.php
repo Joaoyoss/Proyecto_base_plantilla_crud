@@ -1,13 +1,10 @@
 
 <!--==========================================================================
-             FORMULARIO (registro) lo que se envia desde la interface a la base de datos
+             FORMULARIO (registro) 
 =============================================================================-->
-<!--div class="container py-5">
-                    <h5 class="text-center container py-3">Registrate aquì</h5>
-</!--div-->
-<!--<div class="d-flex justify-content-center">-->
 
-<form class="p-2" method="post"><!--ojo!!! que debì colocar antes este metodo en el form!!!!!!!PERO OJOOOO COJOOOONEEEE CON MAYÙSCULA!!!!!!!!!!!!!!!!!11PIIIIINNNNGAAAA||||||||Y TIENES QUE COLOCAR LA DIRECCIÒN DE URL COOOÑOOO|||||||!!!!!!!!!!!!!!!!!SE COLOCA SIEMPRE EN ACTION LA DIRECCIÒN DEL INDEX QUE ENLAZA CON EL CONTROLADOR ---PORQUE ES QUIÈN TIENE TODOS LO REQUIRED--- QUE ENLAZA CON EL RESTO DE LA PLANTILLA QUE ES QUIENN LLAMA EL SECTION DE PLANTILLA Y LOS SECTION-->
+
+<form class="p-2" method="post"><!--ojo!!! que debì colocar antes este metodo en el form -post-!!!!!!!PERO OJOOOO COJOOOONEEEE CON MAYÙSCULA!!!!!!!!!!!!!!!!!PIIIIINNNNGAAAA-->
 
         <div class="form-group">
             <label for="nombre">Registre su nombre y sus apellidos:</label>
@@ -55,13 +52,12 @@
         </div>
 
         <?php
-            #require_once "controllers/controlador_de_formularios.php";
 
             //$postFormularioRegistro= new ControladorFormulario(); #Esta es la manera de conectar el controllador y su clase con este archivo html (Instancio el nuevo objeto)
             //$postFormularioRegistro-> ctrRegistro(); # Esta es la manera de llamar el mètdo (Llamo o declaro el mètodo) y ene el otro lado estoy pendiente de recibir todas las variables de la clase post formulrio que tienen nombre de los input y que en el mètodo debo sacar esos datos con un if y su impresiòn.
 
            /*=======================================================================================
-                         FORMA EN QUE SE INSTANCIA LA CLASE DE UN MÈTODO ESTÀTICO
+            INSTANCIA LA CLASE DE UN MÈTODO ESTÀTICO
            =======================================================================================*/
            $registroFormulario = ControladorFormulario::ctrRegistro();
            if($registroFormulario=="ok"){
@@ -116,5 +112,3 @@
         <button type="submit" class="btn btn-primary ">Enviar</button>
         </div>
 </form>
-
-<!--</div>-->

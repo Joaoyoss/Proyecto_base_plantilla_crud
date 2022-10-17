@@ -1,9 +1,8 @@
 <?php
 
-
 if (isset($_GET["var_gt_token"])){
 
-    $item="token";#Nombre de la columna de la tabla de la base de datos; me buscarà en la columna llamada sting token de la base de dartos.
+    $item="token";#Nombre de la columna de la tabla de la base de datos; me buscarà en la columna llamada stRing token de la base de dartos.
     $valor=$_GET["var_gt_token"];#Se almacena todo lo que viene de inicio pagina y es la variable GET de valor de token de tabla para ese usuario y aasume el dato del valor de token columna base de datos
     $usuarioRecibido=ControladorFormulario::ctrSeleccionarRegistro($item, $valor);#Si viene algo en el id (el nùmero de usuario de la tabla) (con el metodo isset para identificar que no sea nulo) traigo ese usuario o sus datos de tabla con el nùmero id de tabla y tomo los datos y los guardo en la variable $valor, seleccionando el mètodo seleccionar ctr registro pasando los paràmetros $item de $valor, guardandolos en la variable, hago la busqueda en la base de dato con el mètodo que me relacione la sintaxis usada antes para leer esosmdatos de la base de datos y despuès un nuevo ,ètodo que llamarè par ala actualizaciòn del update del CRUD y que contendarà en el string la sintaxis para SQL de un update de la base de datos.
     #Hacemos un print r de html de esa variable dentro o con un echo de php para visualizar en html lo què trae: 
@@ -17,7 +16,7 @@ echo'<b1 class="d-flex justify-content-center py-3"> EDITE los datos que desea m
 ?>
 
 <!--==========================================================================
-             FORMULARIO (registro) lo que se envia desde la interface a la base de datos
+    FORMULARIO (registro) lo que se envia desde la interface a la base de datos
 =============================================================================-->
 <!--div class="container py-5">
                     <h5 class="text-center container py-3">Registrate aquì</h5>
@@ -137,14 +136,9 @@ echo'<b1 class="d-flex justify-content-center py-3"> EDITE los datos que desea m
         </script>'; #Esto borra la informaciòn que trae el formulario en el navegador html
 
         echo '<div class="alert alert-danger">Error, de caracteres introducidos en el password, no se permiten caracteres especiales</div>';     
-    };
-          
+    };        
 
-
-?>
-
-        
-           
+?>      
         <div class="d-flex justify-content-center">
         <button type="submit" class="btn btn-primary ">Actualizar</button>
         </div>

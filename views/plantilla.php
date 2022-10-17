@@ -2,8 +2,6 @@
 session_start(); //Esto destruye las secciones que esxistan cuando salga del sistema (mientras no se salga de la secciòn la varible de secciòn permanece con dato ok)
 ?>
 
-
-
 <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -150,7 +148,12 @@ session_start(); //Esto destruye las secciones que esxistan cuando salga del sis
                 </ul>
             </div>
         </div>
-<!-- HASTA AQUÌ DEFINÌ POSICION Y ESTADO DE LOS BOTONES Y CONDICIÒN DE LA VARIABLE DE LA URLA PARA SER RECIBIDA POR EL GET Y REDIRECCIONAR EL SECTION DE PÀGINA QUE NECESITO-->
+
+<!--===========================================================================================================
+ HASTA AQUÌ DEFINÌ POSICION Y ESTADO DE LOS BOTONES Y CONDICIÒN DE LA VARIABLE DE LA URLA PARA SER RECIBIDA 
+ POR EL GET Y REDIRECCIONAR EL SECTION DE PÀGINA QUE NECESITO
+=============================================================================================================-->
+
         <!--==========================================================================
             SECTION / CONTENIDO FORMULARIO (ingreso/registro) O CONTENIDO TABLA (inicio) O SALIR
           =============================================================================-->
@@ -158,6 +161,7 @@ session_start(); //Esto destruye las secciones que esxistan cuando salga del sis
         <?php
         # Acà con estas lineas de còdigo pregunto si vienen o nò variables GET en la URL; còmo se hace? : se hace con la funciòn isset y determina si una variable està definida o indefinida o null....
              if(isset($_GET["var_pagina"])){# OJO!!!El mètodo GET me busca esa variable var_pagina en la url y con el mètodo isset me determina si el dato de la variable en caso de que aparezca viene definido o null. !!!!-DEFINE SI EXISTE UNA VARIABLE Y UN DATO DE ESA VARIABLE-!!!!
+                
                 if($_GET["var_pagina"]=="salir"||#EVITA ATAQUES CODE INJECCTION con esta lista blanca!!!!!!!!!!!!!!11
                    $_GET["var_pagina"]=="editar" ||        
                    $_GET["var_pagina"]=="inicio" ||       
