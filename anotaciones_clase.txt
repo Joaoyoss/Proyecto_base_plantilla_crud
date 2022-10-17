@@ -1,0 +1,97 @@
+                                                                                              Segunda versiòn: 26/09/2022
+_____________________________________________________________
+Patròn MVC (Doble encapsulamiento)
+
+El patròn modelo vista controlador es un tipo de diseño que separa en capas bien definidas el desarrollode una aplicaciòn
+
+1- Modelo: Encargado de la lògica de la aplicaciòn y la conexiòn con la base de datos.
+2- Vista: Las responsables de mostrar al usuario los resultados que obtiene del modelo a travès del controllador.
+3- Controlador: Encargado de gestionar las peticiònes del usuario, procesarlas invocando al modelo y nuevamente mostrarlas
+ al usuario a travès de las vistas, es una segunda capa que valida la informaciòn que viene y và del servidor al usuario.
+
+_______________________________________________________________
+Pipeline (proceso o pasos) de un rpoyecto web
+
+Pipeline de un proyecto web es el proceso paso a paso que se lleva a cabo para realizar un proyecto profesional de desarrollo
+ web, para ello se tienen en cuenta tres fases principales:
+
+Fase 1: Planeaciòn y diseño.
+Fase 2: Desarrollo frontend
+Fase 3: Desarrollo backend
+               _______________________________________________________________________
+_____________  ===!!!OjO Buscar en YouTube === https://tutorialesatualcance.com/cursos  
+Fase 1 
+    ·Brief (Fase de investigacion, condiciones de partida, anàlisis de necesidades, encuesta, entrevista, definiciòn
+                      de objetivos con el cliente).
+    ·Cotización
+    ·Coincepto (Definir la comunicaciòn visual que se desea transmitir desde el proyecto web).
+    ·Sitemap (Niveles de profundidad del sistema o desarrollo del proyecto web)
+    ·Wireframe (Esqueleto, estructura donde se ubica la estructura de los elementos visuales de ese desarrrollo)
+    ·Layouts (Acabado donde se mezclan colores, imagenes, tipografìa acorde al concepto).
+
+____________
+Fase 2
+     ·Desarrollo de plantillas que se construyen en lenguahes del lado del cliente: HTML5, CSS3, JavaScript,
+      JQuery(librerìa o plugins)), Boostrap4(Framework de diseño responsive CSS), Angular(Framework, conexiòn
+      base de datos serv backend para JS), PHP...
+
+____________
+Fase 3  (Despuès de terminada el desarrollo de palntillas pasamos a la fase de desarrollo del lado del servidor y conexiòn a base de datos).
+     · Desarrollo del lado del servidor (php, MySQL, NodeJs, MongoDB, Laravel, Codelgniter e igualmente todo encapsulado en paradigma)
+
+Fullstack es el que combina tanto la fase 2 como la fase 3. Ver cursos, UX, Boostrap, Angular, WordPress (para bases de datos)
+
+CRUD Basico desde cero parte-1 10:31
+
+__________________________________________________________________________________________
+CONSTRUCCION DE UNA PLANTILLA HTML
+
+//w3school de boostrap (ingreasr datos y enrrolarce)
+//fontawesome (copiar link: -<script src="https://kit.fontawesome.com/e632f1f723.js" crossorigin="anonymous"></script>-)
+//w3Layout.com se tiene plantillas gratuiras que se pueden emigrar al patròn MVC (Tiene todo tipo de plantillas temáticas / restaurante, arriendo, comercio, arriendo)OJO!!!
+
+Quedè en la 5  minuto 9:45
+
+__________________________________________________________________________________________________
+VARIABLES DE SESIÒN
+
+session_star es una funciòn que le dice al navegador: voy a trabajar con variables de sesion, asì que por favor tenmelas en cuenta.
+
+OK toido...quedarìa habilitar un repositorio y colocar esto (limpiando antes comentarios) y ojalà lo que aparezca de D,MININTana y actualizar curriculum... OJOO!!! PROXIMAMENTE (fin de semana), ...y estudiar: 
+- Curso master en php comprado en udemy por mi usuario.
+Laravel, ajax (php seguridad) codeIgniter4
+
+__________________________________________________________________________________________________
+SEGURIDAD INFORMÀTICA !!!Para evitar vurnerabilidad y exposiciòn bàsicas en una aplicaciòn.
+
+Ataques informàticos y modos de evitarlos o prevenirlos (recursos de protecciòn para disminuir vulnerabilidad); tipos de ataques de cada tipo:
+
+- Ataque XSS conocido como (cross-site scripting)
+    Es cuando se puede inyectar un script (còdigo js) en el output de una apicaciòn web de maenra que ejecuta en un navegador al validar
+incorrectamente datos del usuario y e suelen inyectar mediante un formulario web o un enlace alterado. Introduciendo en el input de un formularioio
+por ejemplo (donde se debe introducir un nombre y el usuario introduce un código js)
+
+   | Soluciòn a ataque XSS conocido como (cross-site scripting): 
+        1- Usar unfunction.preg_match.php en laravel, son funciones que permiten comparar los caracteres que se estàn escribiendo en las entradas input
+con unos patrones o expresiones regulares, haciendo una validaciòn del lado del cliente, que se usan para còdigos y asì evitsrlos no  permitiendolos pasar
+por las entradas. Si se ejecutan es que no existe còdigo en las entradas,sino manda in error con una condicional if. Darà error con caracteres de <>/!"]}o
+palabras claves en el input o de expresiones regulares, porque son para escribir còdigo, validarà solamente nombres con letras regulares sin caracteres
+esepciales.
+        2- Nunca usar la etiqueta de cierre de php -?>- EHAAA!, si cierras la etiqueta se puede incluir còdigo de js despuès de tu archivo o lìnea
+de cierre de php, dejala siempre abierta para que no permita trabajar otro tipo de lenguaje en ese documento.
+
+- Ataque Cross-Site Request Forgeries CSRF
+     Es cuando se provoca que el usuario ejecute una acciòn no intencionada en una aplicaciòn en la que iniciò sesiòn. Consiste en que el usuario al estar 
+logueado en un sitio web tiene el riesgo al actualizar su perfil, o añadir objetos, o postear mensaje o cualquier acciòn de update...
+Desde la consola del navegador web se puede introducir otro nùmero id del input y alterar el dato a actualizar en la posiciòn de la base de datos del
+registro de la fila y ejecuta la opciòn para otro elemento que puede ser igualmente un delete.
+
+    | Soluciòn a ataque Cross-Site Request Forgeries CSRF: 
+          1- Token (con los famosos tokens!!!!!!!!!!!) elementos encriptados, puede ser el elemtno encriptado de cualquiera de los del registro o base de datos
+del usuario, ej: el nombre, el correo, o algùn otro id o número que no harà mas que tomar esa cadena y por una funciòn unirla a otra nueva o sumar
+nombre y correo (dos elementos y sumar esos dos datos) encryptados en una combinaciòn alfa numèrica que sea necesario encryptar y desencryptar
+por medio de la funciòn md5() de php que permite hacer encryptaciones.
+Buscar en pagina w3school.com sobre php te permite y todo visualizar el resultado de salida de la encryptaciòn de un dato cualquiera y su retorno.
+Ej: -"Fulanito Pérez + fulanito@gmail.com";- en la entrada de una cadena me arrojarà un token: 465fhunguj5465nklln567576nl3i9n6 y viceversa  y asì
+guardo el dato en tabla y condiciono en la aplicaciòn que me tendrìa que coinsidir antes de hacer cualquier update en vase de datos.
+Sin el token del còdigo no escribe en la base de dato, o actualiza, o borra nada...

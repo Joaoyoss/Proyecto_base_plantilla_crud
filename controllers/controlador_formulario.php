@@ -44,12 +44,16 @@ Class ControladorFormulario{
                      #===================================================================
                         $token=md5($_POST["var_registroNombre"]."+".$_POST["var_registroEmail"]);# haciendo token para evitar manipulaciones internas desde la conslola de navegador
 
+                        #Acà incluimos una funciòn de encryptamiento para los password antes de enviarlos a BD con un metodo llamado crypt
+                        #***El primer paràmetro es la contraseña que estamos recibiendo en la variable post y el segundo paràmetro es el salt de 21 caracteres aleatorios.
+                        $encryptPassword = crypt($_POST["var_registroPassword"], '$2a$07$usesomesillystringforsalt$'); #(se traduce en: usa cualquier lìnea de texto paea este salt de 25 caracteres aleatorios!!!, puedes personalizarlo con cualquier otros 25 caracteres.)
+
                         $datos=array("token"=>$token,
                         #Acà pasamos esa variable token creada anteriormente y que contiene la cadena str con la concatenaciòn de nombre mas correo y pasada por la funciòn md5 pars generar un token que serà guardado en bd.
                         "nombre"=>$_POST["var_registroNombre"],
                         #Variables que estàn en el la funciòn mdlRegistro de la clase ModeloFormularios del archivo modelo formulario del models y que recogen las variables de html registro y las guarda en estas variables de la clase ModeloFormularios del models y ese a su vez serà ejecutado por la clase conexiòn tambien del models.
                         "email"=>$_POST["var_registroEmail"],
-                        "password"=>$_POST["var_registroPassword"]); 
+                        "password"=>$encryptPassword); 
                         #..y pasan al models instanciando esa clase del models en una segunda funcion aquì abajo...:
                     $respuesta=ModeloFormularios::mdlRegistro($tabla,$datos); #Almaceno lo que me entregue el modelo en el objeto respuesta. Esta respuesta viene de modelo formulario y se le devuelve a la vista porque es instanciada y llamada por registro en el view.
                     return $respuesta;#Esta respuesta se retorna de lo que traiga el modelo.
@@ -98,6 +102,8 @@ Class ControladorFormulario{
                 #echo '<pre>'; print_r($respuesta); echo '</pre>';
                 
                 if($respuesta["email"] == $_POST["var_ingresoEmail"] && $respuesta["password"] == $_POST["var_ingresoPassword"]){
+
+                    ModeloFormularios::mdlActualizarIntentosFallidos($tabla, $email, 0);#Volver a pasar a o el conteo acumulativo en base de datos de los intentos fllidos.
 
                     $_SESSION["var_validarIngreso"]="ok";
 
@@ -271,7 +277,7 @@ Class ControladorFormulario{
                                     
                                     if($respuesta=="ok"){
                                         $tabla="registro_usuarios";
-                                        $datos=array("token"=>$token_conformado_actualizado_usuario
+                                        $datos=array("token"=>$token_conformado_actualizado_usuario,
                                         #Viene del input de editar que viene de la tabla y lo pasa al CRUD data.
                                                      "nombre"=>$_POST["var_actualizarNombre"],
                                                      #Variables que estàn en el la funciòn mdlRegistro de la clase ModeloFormularios del archivo modelo formulario del models y que recogen las variables de html registro y las guarda en estas variables de la clase ModeloFormularios del models y ese a su vez serà ejecutado por la clase conexiòn tambien del models y lo pasa al CRUD data.
