@@ -105,7 +105,26 @@ Class ModeloFormularios{
           $stmt=null;
         }
   
+         /*=================================================
+         FUNCION actualizar intentos fallidos
+        ===========================================*/
 
+        static public function mdlActualizarIntentosFallidos($tabla, $email, $valor){
+
+                                            
+         $stmt=Conexion::conectar()->prepare("UPDATE $tabla SET intentos_fallidos=:intentos_fallidos WHERE email=:email");#ERA LA PUTA COMA QUE HABÌA EN EL SQL!!!!!!!!!!
+ 
+         $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+         $stmt->bindParam(":intentos_fallidos", $valor, PDO::PARAM_INT);
+ 
+         if($stmt->execute()){
+            return "ok";
+         }else{
+            print_r(Conexion::conectar()->errorInfo());
+         }
+         $stmt->close();
+         $stmt=null;
+       }
 
 
 

@@ -83,7 +83,7 @@
             }
             </script>'; #Esto borra la informaciòn que trae el formulario en el navegador html
 
-            echo '<div class="alert alert-danger">Error, de caracteres introducidos, no se permiten caracteres especiales</div>';     
+            echo '<div class="alert alert-danger">Error, de caracteres introducidos, no se permiten caracteres especiales ni en blanco</div>';     
            }
 
            else if($registroFormulario=="error"){

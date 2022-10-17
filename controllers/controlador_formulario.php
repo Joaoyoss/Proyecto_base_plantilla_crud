@@ -71,7 +71,7 @@ Class ControladorFormulario{
 
 #OJOOO!!!!!Dentro de los input del html existe un atrivuto llamado name que su dato corresponde al NOMBRE DE LA VARIABLE POST que viene desde el o por el url (recuerden que la variable post a diferencia de la GET es oculta aunque ambas vienen por el url) y los valoresde esas variables seràn  datos que entren por el input de la  y anteriormente se debe definir el formulario con el mètodo post -method="post" en el DOM de HTML, sea etiqueta div, label, o lo que sea...OJO!!!!  Para evitar que la informaciòn se filtre en la url o se visualice, se coloca el metodo POST y no el mètodo GET.
 
-
+#AQUÌ EN EL INGRESO AL SISTEMA INCLUYO LOS INTENTOS FALLIDOS EN LA BASE DE DATOS DESDE LOS INTENTOS DE INGRESO FALLIDOS de la pagina de ingresos.
        /*======================================================================
            INGRESO  MÈTODO DE LLAMADA AL FORMULARIO del models PARA LECTURA de DATOS DE INGRESO  BASE DE DATOS lectura read del crud
          =========================================================================*/#Lectura Query REad del Query del CRUD
@@ -84,7 +84,7 @@ Class ControladorFormulario{
 
                 $respuesta=ModeloFormularios::mdlLeerRegistro($tabla, $item, $valor);#Traigo en valor o leo todos los datos de la base de datos..
 
-                echo '<pre>'; print_r($respuesta); echo '</pre>';
+                #echo '<pre>'; print_r($respuesta); echo '</pre>';
                 
                 if($respuesta["email"] == $_POST["var_ingresoEmail"] && $respuesta["password"] == $_POST["var_ingresoPassword"]){
 
@@ -99,6 +99,42 @@ Class ControladorFormulario{
 
                 }else{
 
+                    
+
+                    #=====================================================
+                     #     CONTAR LOS INTENTOS FALLIDOS 
+                     #=======================================================
+
+                    $intentos_fallidos_reciente=$respuesta["intentos_fallidos"]+1; #Aquì me leee la columna de intentos_falidosd ela base de datos y le suma 1 al valor que trae
+                    #echo '<pre>'; print_r($intentos_fallidos_reciente); echo '</pre>';
+
+                     #=====================================================
+                     #     ACTUALIZAR INTENTOS FALLIDOS EN BASE DE DATOS
+                     #=======================================================
+                     
+                     if($intentos_fallidos_reciente<=2){
+
+                     $tabla="registro_usuarios";
+                     $email=$_POST["var_ingresoEmail"];
+                     $valor=$intentos_fallidos_reciente;
+
+                     $respuesta=ModeloFormularios::mdlActualizarIntentosFallidos($tabla, $email, $valor);
+                    } 
+                     else {
+                        echo '<script>
+                          if (window.history.replaceState){ 
+                          window.history.replaceState(null, null, window.location.href);
+                          }
+                          </script>'; 
+
+                        echo '<div class="alert alert-warning">Alcanzò el màximo nùmero de intentos incorrectos posibles, debes validar que no eres un robot RECAPTCHA</div>';
+                        echo  '<script>
+                          setTimeout(function(){
+                          window.location="index.php?var_pagina=registro";
+                          },3000);
+                          </script>';
+                        }
+
                     echo '<script>
                  if (window.history.replaceState){ 
                           window.history.replaceState(null, null, window.location.href);
@@ -106,7 +142,7 @@ Class ControladorFormulario{
                           </script>'; 
 
             echo '<div class="alert alert-danger">No existe usuario registrado con ese email o la contraseña es incorrecta</div>';
-
+                     
                 }
 
                 #echo '<pre>'; print_r($respuesta); echo '</pre>'; #Esta lìnea debe traerme las coincidencia de la base de datos si las encontrò por lo que el metodo que en realidad uso para el ingreso es el R del CRUd en la base de datos a los mètodos que estàn dentro del archivo modelo_formulario de la carpeta models que a su vez ya recibe las varibles con los datos adecuados a la tabla y los incorpora en concatenamiuento a la cadena del SQL que llama a la conexiòn que lo envìa al URL y junto con la sintaxis SQL recibe y procesa los datos de ida y vuelta.
