@@ -63,13 +63,13 @@ session_start(); //Esto destruye las secciones que esxistan cuando salga del sis
                         <?php if($_GET["var_pagina"]=="registro"):?>
 
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.php?var_pagina=registro">Registro</a><!--Con ese signo de ? interrogaciòn es suficiente para que aparezcan y con el href aparecen en la url la cadena: -index.php?var_pagina=registro- -->
+                        <a class="nav-link active" href="registro">Registro</a><!--Con ese signo de ? interrogaciòn es suficiente para que aparezcan y con el href aparecen en la url la cadena: -registro- -->
                     </li>
 
                         <?php else: ?>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?var_pagina=registro">Registro</a>
+                        <a class="nav-link" href="registro">Registro</a><!--!!!OJO Acà se sustituyò el url ruta en el ahref index.php?pagina= anterior por el $1 del mètodo RewriteEngine On y RewriteRule ^([-a-zA-Z0-9/]+)$ index.php?pagina=$1 dedl archivo .htaccess que permite sustituir las url por rutas amigables e interpreta donde antes decìa: -href="index.php?pagina=registro"- ahora podrà decir: -href="registro"- y el metodo RewriteRule se encarga de asumir lo que debìa aparecer realmente y sustituirlo por algo màs simple y amigable!!!!!OJO Internamente .htaccess le dirà a php; eso que escribiste en registro es una variable get que se llama pàgina o exactamente de MANEJAR TODAS LAS VARIABLES GET POR SUS NOMBRES coordinados desde .htaccess y aparecerà bomitas las rutas de la variable get.!!!OJOOO!!! Tiene que coincidir el nombre de la variable GEt del html con el mismo nombre en .htaccess porque sino no trabaja justamente como me sucediò!!!!-->
                     </li>  
 
                         <?php endif ?>
@@ -81,13 +81,13 @@ session_start(); //Esto destruye las secciones que esxistan cuando salga del sis
                         <?php if($_GET["var_pagina"]=="ingreso"):?>
 
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.php?var_pagina=ingreso">Ingreso</a>
+                        <a class="nav-link active" href="ingreso">Ingreso</a>
                     </li>
 
                         <?php else: ?>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?var_pagina=ingreso">Ingreso</a>
+                        <a class="nav-link" href="ingreso">Ingreso</a>
                     </li>
 
                         <?php endif ?>
@@ -99,13 +99,13 @@ session_start(); //Esto destruye las secciones que esxistan cuando salga del sis
                         <?php if($_GET["var_pagina"]=="inicio"):?>
 
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.php?var_pagina=inicio">Inicio</a>
+                        <a class="nav-link active" href="inicio">Inicio</a>
                     </li>
 
                         <?php else: ?>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?var_pagina=inicio">Inicio</a>
+                        <a class="nav-link" href="inicio">Inicio</a>
                     </li>
 
                         <?php endif ?>
@@ -117,29 +117,29 @@ session_start(); //Esto destruye las secciones que esxistan cuando salga del sis
                         <?php if($_GET["var_pagina"]=="salir"):?>
 
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.php?var_pagina=salir">Salir</a>
+                        <a class="nav-link active" href="salir">Salir</a>
                     </li>
 
                         <?php else: ?>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?var_pagina=salir">Salir</a>
+                        <a class="nav-link" href="salir">Salir</a>
                     </li>
 
                         <?php endif ?>
 
                         <?php else: ?>
                             <li class="nav-item">
-                                 <a class="nav-link active" href="index.php?var_pagina=registro">Registro</a>
+                                 <a class="nav-link active" href="registro">Registro</a>
                             </li>
                             <li class="nav-item">
-                                 <a class="nav-link" href="index.php?var_pagina=ingreso">Ingreso</a>
+                                 <a class="nav-link" href="ingreso">Ingreso</a>
                             </li>
                             <li class="nav-item">
-                                 <a class="nav-link" href="index.php?var_pagina=inicio">Inicio</a>
+                                 <a class="nav-link" href="inicio">Inicio</a>
                             </li>
                             <li class="nav-item">
-                                 <a class="nav-link" href="index.php?var_pagina=salir">Salir</a>
+                                 <a class="nav-link" href="salir">Salir</a>
                             </li>
 
                     <?php endif ?>

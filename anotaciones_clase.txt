@@ -95,3 +95,60 @@ Buscar en pagina w3school.com sobre php te permite y todo visualizar el resultad
 Ej: -"Fulanito Pérez + fulanito@gmail.com";- en la entrada de una cadena me arrojarà un token: 465fhunguj5465nklln567576nl3i9n6 y viceversa  y asì
 guardo el dato en tabla y condiciono en la aplicaciòn que me tendrìa que coinsidir antes de hacer cualquier update en vase de datos.
 Sin el token del còdigo no escribe en la base de dato, o actualiza, o borra nada...
+
+5816888dd7ddfb4268671833f11d5c1a  es la encriptaciòn en md5 php de Yosmel Abreu + yosmelmalvarez@gmail.com; probar en el sitio: https://www.w3schools.com/PHP/phptryit.asp?filename=tryphp_func_string_md5
+
+***Algunos de los frameworks de PHP más conocidos son CodeIgniter, Symfony, Zend y, por supuesto, Laravel.
+
+Se agreaga para evitar injeccion de còdigo, el archivo .htaccess!!:  Acceso a la aplicaciòn impidiendo acceder a las carpetas o archivos de los modelos
+y los controlladores..!!! Solamente el sistema teniendo accdeso al index.php y nada mas mediante el archivo htcacces...
+
+Options All -Indexes/ Se agrrega en el archivo esta lìnea de còdigo....||||!!!!!(significa indexar todos los directorios...s)significa que si quiero ingresar
+a las carpoetas del mvc NO ME DEJARÌA!!! ME DARÌA ERROR 403!!!!< 
+
+Me darà un FORBIDEN!!! LAWEAAAA!!! Ya no me permite acceder desde el navegador...|||||||||||||||
+
+_____________________________________________________________________________________________
+ATAQUE DE ROBOTS (fuerza bruta)
+
+Limita la cantidad de intentos de logueo en el ingreso....asì se evita el 🤖 robot cl8aoªª!! o colocando un captcha! ej: el recaptcha de google... para 
+incluirlo se necesita un dominio real en hosting 
+
+O màs artesanal crear en cada usuario de la base de datos el registro de intentos fallidos ....(predeterminando siempre el valor nullo cada vez que se crea)
+
+Se puede evitar con captcha o limitando las cantidades de posibilidad de veces de logearse en la aplicaciòn.
+
+_______________________________________________________________________________________________
+ENCRYPTAR CONTRASEÑAS
+
+En PHP existe una funciòn para encryptar contraseña llamada crypt que utiliza un hash de argumento de string
+de estàndar unix y se agrega un paràmetro llamadao salt pars que combierta en un modèlo de encryptamiento a eso que queremos encryptar.
+
+Los paràmetros salt son diferentes, existen un sinumero de ellos blowfish te permite utilizar 22 caracteres del alfabeto que desees...
+
+Ejemplo de uso de funcion de encryptamiento salt tipo blowfish:
+
+
+if (CRYPT_BLOWFISH == 1) { 
+          echo 'Blowfish:    ' . crypt('rasmuslerdorf', '$2a$07$usesomesillystringforsalt$') . "\n";
+}
+
+Lo que harìamos es usar esta funciòn cuando se estè registrando el usuario por primera vez y se envìa encryptada...con una variable que se llama encryptar password.
+
+________________________________________________________________________________________
+URLS AMIGABLES CON .HTACCES OCULTAR DIRECTORIOS Y OTRAS COSAS
+
+URL  amigables en HTACCESS: 
+   HTACCESS es un archivo de configuraciòn distribuida en formato AXIS similar al block de notas popularizado con el servidor http apache
+   (el màs usado del mundo cuando hablamos de servidores web), permite definir diferentes directivas de configuraciòn para cada directorio
+   con sus respectivos subdirectorios sin necesidad de archivo de configuraciòn principal del apache. Los archivos htacces sob usados frecuentemente
+   parsa especificar restrivcciones de seguridad para directorios (en el ejemplo nuestro especifica restricciones de acceso a nuerstros directorios desde
+    internos de nuestro sistema en el navegador). Los servidores igualmente suelen usar el htaccess para reescribir url largas y complejas en
+   otras mas simples y facxilmente recordables (amigables), ademàs permite bloquear a usuarios por direcciònes ip, dominios, robots y arañas web.
+
+   Convertir URL con variables get en URL amigable: 
+   Se hace con el htacces....quedè en minuto 6:06 capítulo url's amigables con .htacces
+   
+
+
+
