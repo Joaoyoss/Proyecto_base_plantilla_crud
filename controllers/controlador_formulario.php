@@ -99,9 +99,11 @@ Class ControladorFormulario{
                 $respuesta=ModeloFormularios::mdlLeerRegistro($tabla, $item, $valor);
                 #Traigo en valor o leo todos los datos de la base de datos..
 
+                $encryptPassword = crypt($_POST["var_ingresoPassword"], '$2a$07$usesomesillystringforsalt$');
+
                 #echo '<pre>'; print_r($respuesta); echo '</pre>';
                 
-                if($respuesta["email"] == $_POST["var_ingresoEmail"] && $respuesta["password"] == $_POST["var_ingresoPassword"]){
+                if($respuesta["email"] == $_POST["var_ingresoEmail"] && $respuesta["password"] == $encryptPassword){
 
                     ModeloFormularios::mdlActualizarIntentosFallidos($tabla, $email, 0);#Volver a pasar a o el conteo acumulativo en base de datos de los intentos fllidos.
 
@@ -231,7 +233,11 @@ Class ControladorFormulario{
                                   #PROTECCION XSS (Cross-Site Scripting) CONTRA CODIGOS JS U OTROS
                                  #================================================================
                                 if (preg_match('/^[0-9a-zA-Z]+$/', $_POST["var_actualizarPassword"])){
-                                    $password=$_POST["var_actualizarPassword"];
+
+                                    #Encrypto igualmente la nueva contraseña
+                                    $encryptPassword = crypt($_POST["var_actualizarPassword"], '$2a$07$usesomesillystringforsalt$');
+
+                                    $password=$encryptPassword;
                                     #Esta viene del dato automàtico editar etiqueta input donde asigna OTRO  valor que viene porque el cliente decidiò escribir OTRA CONTRASEÑA que viene ya no vacìa vacio y pasa el dato automatico y esta condicional la verifica de escritura de codigo en su input y la bota si trae algo extraño.
                                 }
                                 else{
