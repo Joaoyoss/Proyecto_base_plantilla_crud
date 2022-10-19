@@ -148,7 +148,106 @@ URL  amigables en HTACCESS:
 
    Convertir URL con variables get en URL amigable: 
    Se hace con el htacces....quedè en minuto 6:06 capítulo url's amigables con .htacces
-   
+
+   Se debe uno asegurar que en el alojamiento, el mòdulo rewrite del hosting estè activo para poder encender el motor de rescritura en el archivo
+   htaccess con la linea de còdigo: -RewriteEngine On- Esto permite poder crear reglas de escrituras, con la linea de còdigo -RewriteRule- diciendo
+   a continuaciòn  -^([-a-zA-Z0-9/]+)$- con esto le indicamos que lo tome como caracteres permitidos para colocar como url amigables. 
+   De esta forma le dirà que cuando encuentre en la ruta de escritura el index.php?pagina=$1 (me la reemplae por lo que coloque en el valor del href))
+   ver el archivo .htaccess esa ultima lìnea se llama regla de reescritura para poder modificar en el menù los href de la etiqueta li con las rutas de
+   redirecionamiento, pudiendo cambiar donde antes decìa: href="index.php?pagina=ingreso" ahora podrè colocar href="registro" y el .htaccess asocia
+   la palabra ingreso a $1 y asume la ruta index.php?pagina= (lo que contiene ahora $1) por lo que se puede ahora eliminar de la etiqueta listado <li>
+   del còdigo html toda la parte de la cadena que contenìa: -"index.php?pagina="- y dejar solamente las palabras claves y .htaccess se ocupa del resto
+   con el mòdulo RewriteEngine On y el mòdulo RewriteRule. 
+
+Con màs de dos variables get noc se puede utilizar este especifica regla del .htaccess y ojo!! el nombre de la variable get utilizada en el href de la etiqueta del
+html tiene que tener el mismo nombre que el codigo de la regla en la variable del nombre del .htacces!!!
+
+Quedè en el minuto 13:50 de capitulo url amigables...gracias y byeee!!! Hasta ahorita!!!
+
+El archivo .htacces nos evita tambièn a ataques de robots ...con la regla: <Files .htaccess> order allow,deny  deny from all </Files>
+
+
+#Reestringir accceso a los archivos desde el navegador
+Options All -Indexes 
+
+#Activar modulo Rewrite
+RewriteEngine On
+#Pauqte url amigable del modulo Rewrite
+RewriteRule ^([-a-zA-Z0-9/]+)$ index.php?var_pagina=$1
+
+
+# asegurando el archivo htaccess
+<Files .htaccess>
+order allow,deny
+deny from all
+</Files>
+
+# denegar acceso a archivos de posibles ataques maliciosos extraxtores de webs y navegadores offline
+RewriteBase /
+RewriteCond %{HTTP_USER_AGENT} ^Anarrchie [OR]
+RewriteCond %{HTTP_USER_AGENT} ^ASPSeek [OR]
+RewriteCond %{HTTP_USER_AGENT} ^attach [OR]
+RewriteCond %{HTTP_USER_AGENT} ^autoemailspider [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Xaldon\ WebSpider [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Xenu [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Xenu [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Zeus.*Webster [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Zeus [OR]
+RewriteRule ^.* - [F,L]
+
+*****Buscar en internet: usos y configuraciones que se le pueden dar a los archivos .htaccess !!!OJO pagina colocar en marcadores favoritos del navegador
+ //bookmarks
+
+-Trucos y ejemplos de configuraciòn del rchivo htaccess de apache
+https://uniwebsidad.com/tutoriales/trucos-y-ejemplos-de-configuracion-del-archivo-htaccess-de-apache?from=librosweb
+
+-Todo lo que tienes que saber sobre htaccess y algunos trucos extras
+https://ayudawp.com/todo-sobre-htaccess/#Limitando_metodos_de_peticion_GET_yPUT_al_servidor
+
+-Còmo crear URL amigables con .htaccess
+https://www.emenia.es/como-crear-urls-amigables-con-htaccess/
+
+-Còdigos ùtiles .htaccess para sitios web
+https://www.webempresa.com/blog/codigos-utiles-htaccess-para-wordpress.html
+
+_____________________________________________________________________________________________
+CERTIFICADO SSL (Secure Sockets Layers)
+
+Protocolo de seguridad utilizado en internet. Los navegadores suelen indicar  que el sitio que estàs visitando està asegurado con SSL/TSL Transfor
+Layer Security un protocolo màs ampliom de seguridad similar a SSL del cual es sucesor (mediante un candado verde icono en la barra de directorio), 
+y consiste SSL en encriptar los datos que se envian a un navegador, al principio solamente utilizado para cuentas bancarias y otra informaciòn
+importante pero actualmente se usa en muchas màs situaciones incluyendo google que tiene en cuenta para el posicionamiento de los sitios web
+si està usando el protocolo o està certificado con SSL o no...y son los dominios que tienen la S al final del dominio del protocolo http (https).
+
+https://www.dominio.com  
+Cuando tiene certificado SSL
+
+http://www.dominio.com
+Cuando no tiene certificado SSL
+
+Sin encriptacion cualquier tipo de informaciòn enviada desde el servidor al navegador puede ser interceptada, pero con SSl es muy dificil acceder a los datos encrypytados.
+
+Quedè en el minuto 1:35 de capitulo Certificado SSL...           ...gracias y byeee!!! Hasta ahorita!!!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
 
 
 

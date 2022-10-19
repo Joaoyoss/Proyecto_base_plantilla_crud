@@ -3,11 +3,11 @@
 
 if(isset($_SESSION["var_validarIngreso"])){
   if($_SESSION["var_validarIngreso"] !="ok"){
-    echo'<script>window.location="index.php?var_pagina=ingreso";</script>';
+    echo'<script>window.location="ingreso";</script>';
     return;
     }
   }else{
-    echo'<script>window.location="index.php?var_pagina=ingreso";</script>';#Esto impide el acceso o redirige a ingreso o bota la pàgina inicio si no està la condiciòn de seccion ok que es solamente con logueo y el mètodo lo activa siempre el index con la plantilla.
+    echo'<script>window.location="ingreso";</script>';#Esto impide el acceso o redirige a ingreso o bota la pàgina inicio si no està la condiciòn de seccion ok que es solamente con logueo y el mètodo lo activa siempre el index con la plantilla.
     return;
   
 }
@@ -298,7 +298,7 @@ Array
                   <div class="btn-group">
 
                     <div class="px-1">
-                    <a href="index.php?var_pagina=editar&var_gt_token=<?php echo $value["token"];?>" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a>  <!--!!!!OJO se debe poner obligatoriamente la etiqueta <a> ancor (anclaje) y no button para que me trabaje el href porue sin la etiqueta anle NO TRABAJA EL HREF; el href solo trabaja en etiquetas ancle!!-->
+                    <a href="index.php?var_pàgina=editar&var_gt_token=<?php echo $value["token"];?>" class="btn btn-warning"><i class="fas fa-pencil-alt"></i></a>  <!--!!!!OJO se debe poner obligatoriamente la etiqueta <a> ancor (anclaje) y no button para que me trabaje el href porue sin la etiqueta anle NO TRABAJA EL HREF; el href solo trabaja en etiquetas ancle!!-->
                     </div>
 
                     <div class="px-1">

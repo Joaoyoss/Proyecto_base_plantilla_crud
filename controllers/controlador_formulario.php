@@ -113,7 +113,7 @@ Class ControladorFormulario{
                  if (window.history.replaceState){ 
                           window.history.replaceState(null, null, window.location.href);
                  }
-                          window.location="index.php?var_pagina=inicio";
+                          window.location="inicio";
                  </script>'; 
 
                 }else{
@@ -149,7 +149,7 @@ Class ControladorFormulario{
                         echo '<div class="alert alert-warning">Alcanzò el màximo nùmero de intentos incorrectos posibles, debes validar que no eres un robot RECAPTCHA</div>';
                         echo  '<script>
                           setTimeout(function(){
-                          window.location="index.php?var_pagina=registro";
+                          window.location="registro";
                           },3000);
                           </script>';
                         }
@@ -356,7 +356,7 @@ Class ControladorFormulario{
                         if (window.history.replaceState){ 
                              window.history.replaceState(null, null, window.location.href);
                         }
-                             window.location="index.php?var_pagina=inicio";
+                             window.location="inicio";
                     </script>';
                     
                     #Esta lìnea refresca la pàgina de inicio y automaticamente me actualiza lo que existe desde la base de datos.

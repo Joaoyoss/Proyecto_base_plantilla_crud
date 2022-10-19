@@ -1,5 +1,36 @@
-Options All -Indexes
+#Reestringir accceso a los archivos desde el navegador
+Options All -Indexes 
 
+#Activar modulo Rewrite
 RewriteEngine On
+#Pauqte url amigable del modulo Rewrite
 RewriteRule ^([-a-zA-Z0-9/]+)$ index.php?var_pagina=$1
+
+# asegurando el archivo htaccess denegando accesos para posibles ataques de robots
+<Files .htaccess>
+order allow,deny
+deny from all
+</Files>
+
+# denegar acceso a archivos de posibles ataques maliciosos extraxtores de webs y navegadores offline
+RewriteBase /
+RewriteCond %{HTTP_USER_AGENT} ^Anarrchie [OR]
+RewriteCond %{HTTP_USER_AGENT} ^ASPSeek [OR]
+RewriteCond %{HTTP_USER_AGENT} ^attach [OR]
+RewriteCond %{HTTP_USER_AGENT} ^autoemailspider [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Xaldon\ WebSpider [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Xenu [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Xenu [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Zeus.*Webster [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Zeus [OR]
+RewriteRule ^.* - [F,L]
+
+#https://uniwebsidad.com/tutoriales/trucos-y-ejemplos-de-configuracion-del-archivo-htaccess-de-apache?from=librosweb
+
+#https://ayudawp.com/todo-sobre-htaccess/#Limitando_metodos_de_peticion_GET_yPUT_al_servidor
+
+#https://www.emenia.es/como-crear-urls-amigables-con-htaccess/
+
+#https://www.webempresa.com/blog/codigos-utiles-htaccess-para-wordpress.html
+
 
