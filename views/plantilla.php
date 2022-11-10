@@ -2,6 +2,7 @@
 session_start(); //Esto destruye las secciones que esxistan cuando salga del sistema (mientras no se salga de la secciòn la varible de secciòn permanece con dato ok)
 ?>
 
+
 <!DOCTYPE html>
     <html lang="en">
     <head>

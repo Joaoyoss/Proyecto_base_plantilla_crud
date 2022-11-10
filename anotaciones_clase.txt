@@ -229,6 +229,115 @@ Sin encriptacion cualquier tipo de informaciòn enviada desde el servidor al nav
 
 Quedè en el minuto 1:35 de capitulo Certificado SSL...           ...gracias y byeee!!! Hasta ahorita!!!
 
+...continuo.
+
+Para la conexion SSL se utilizan dos llaves; una publica y otra privada. Los navegadores utilizan la llave pùblica para encriptar los datos y el servidor utiliza la llave privada para
+desencriptarlos. Todo el mundo podrà codificar mensajes con la misma llave pùblica para encriptar, pero nadie podrà decodificarlos sin la llave privada que estarìa del lado del servidor.
+
+Pasos:
+
+- El navegador hace request en un sitio web
+- El servidor envìa la llave pùblica y un certificado SSL
+- El navegador analiza el certificado SSL, crea una llave simètrica y la envìa al servidor
+- El servidor desencripta la llave simètrica 🔏 con su llave privada y envìa al navegador la pàgina con la llave simètrica
+- El navegador desencripta los datos y muestra la pàgina
+
+Todo esto ocurre en milecimas de segundo...
+
+Los certificados SSL estàn firmados por autoridad de confianza y se usan para que el navegadorsepa que un dominio se ha validado.
+La validaciòn la realiza un a autoridad Certificate Authority como ssl.com, despuès de haber comprado un certificado que garantiza que se pueda confiar en tu sitio web.
+Existen diferentes tipos de certificados para diferentes situaciones. Aunque  tu sitio web no sea un e-commerce, sì puedes es mejor tener un 
+certificado SSL.
+
+https://diego.com.es/ssl-y-openssl-en-php   Ahondar sobre el tema...
+
+Cuando un sitio o hosting està certificado aparece un candadito verde a la izquierda de la url al inicio...y se despliega una ventana con la informaciòn de que
+la conexion es segura y que se encuentra protegida. cunado no; aparece un circulo con un signo de ! dentro que dice en la url: -el sitio no es seguro-
+y esto quiere decir que no està certificada de seguridad o revizada y puede ser objeto de ataque de externos terceros para robar tus datos o contraseñas que compartas en estas pàginas.
+
+Existes dos tipos de certificados: 
+
+Let`s Encrypt Wilcard SSL con www
+     Màs costoso
+
+Let`s Encrypt Wilcard SSL sin www
+     Menos costoso e incluye hasta 10 doiminios.
+
+En ellos creas los keys privados y pùblicos
+
+
+Estas tres  lineas de còdigo de condicion y la ùltima de regla en un archivo .htaccess condicionan siempre a abrir solamente sitios son certificadpSSL o sitios de direciòn solamente https
+
+RewriteCond %{HTTP_HOST} !^$
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteCond %{HTTPS} !on
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+
+Solamente se pueden usar en archivos .htaccess de proyectos que se le haya comprado el certificado SSL para sitios htpps, sino deben de comentarse.|||OJO!!!
+
+______________________________________________________________________________________________________
+______________________________________________________________________________________________________
+CMS 
+
+Què es un CMS?:
+  Content Management System, o lo que viene a ser un sistema de gestiòn de contenidos. Un CMS es un programa desarrollado para que
+cualquier usuario pueda administrar y gestionar contenidos e una web con facilidad y sin conocimientos de programaciòn web.
+
+Entre los CMS màs conocidos estarìan:
+-  WordPress
+- Joomla
+- Drupal 
+
+Todos ellos constriudos con tecnologìa php y mysql
+
+***mi direcciòn de repo de este proyecto...  : https://github.com/Joaoyoss/Proyecto_base_plantilla_crud
+
+_____________________________________________________________________________________________________________
+LARAVEL:
+
+Laravel es uno de los tantos framerwork (marco de trabajo) que existen en php (uno de los principales); en php puedes encontrar diferentes framework como; 
+Codegniter, Gi, Sinfony... pero Laravel es uno de los màs usados.
+
+Es un marco de trabajo de còdigo abierto para desarrollar aplicaciones y servicios web en la versiòn php 5 y php 7. Busca desarrollar còdigo PHP
+de forma elegante y simple, evitando còdigo espagueti.
+
+Fuè creado en 2011 y tiene una gran influencia de frameworks como Ruby on Rails, Sinatra y ASP.NET MVC.
+
+https://laravel.com  Pagina oficial donde se encuentra toda la documentaciòn de larsvel...
+
+
+Ventajas: 
+
+- Ahorro de tiempo en desarrollo de còdigo, agiliza la producciòn.
+- Es màs fàcil y asimilable el intercambio y comprensiòn del còdigo ajeno hecho (cualquiera le puede meter la mano).
+- Estandar de seguridad y perfonmance muy actualizados.
+- Muchos atajos para suplir necesidades bàsicas.
+
+
+Desventajas:
+
+- Muchisimos los archivos, carpetas que debes instalar cuando vas a utilizar un framework.
+- Cambio constante de versiòn y obsolescencia.
+- Es obligaciòn seguir los patrones o estilos de programaciòn que traen los frameworks (Los patrònes de quienes lo construyeron).
+- Cuando estàs terminando de conocerlo; lo cambeaaan de versiòn!
+
+Aunque para un desarrollador back end es fundamental conocer como funciona un framework porque abre oportunidades de empleo.
+
+Instalar laravel de su pàgina oficial.
+...primero debes instaslar composer y despuès laravel de forma global en mi computador....debs ir a consola cmd e ingreesar como admonistrador.
+
+ OJO!!! Para crear el primer proyecto se crea colocando en la carpeta donde queremos colocar el proyecto en el simbolo del sistema el còdigo:
+- laravel new blog -
+1- Abrimos un txt y copiamos ese còdigo como un CMS content Maneger Systems (Un sistema administrador de contenido)
+..con la ayuda del framework laravel haremos nuestro propio CMS y por eso llamaremos a la carpeta donde instalaremos Laravel; CMS
+
+Dentro de la carpeta SMC se me han creado una cantidad de weaaaa|||1!!!
+
+___________________________________________________________
+
+A prtir de acà paso estas anotaciones y guardado de archivo al ùltimo proyecto: proyect_git de ruta: C:\xampp\htdocs\proyect_blog_php\cms
+
+Las anotaciones continuaran aquì perteneciente al curso LARAVEL!!!
 
 
 
